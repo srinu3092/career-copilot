@@ -1,0 +1,7 @@
+{
+  "name": "Career Copilot",
+  "description": "AI Career Strategist featuring ATS Resume Analyzer with skill gap analysis, interactive Mock Interviews with live feedback, and Multi-Agent career coaching in a Bento Grid design.",
+  "requestFramePermissions": ["camera", "microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
