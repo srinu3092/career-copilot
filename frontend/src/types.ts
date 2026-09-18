@@ -44,6 +44,13 @@ export interface ATSAnalysisResult {
   impactfulVerbs: ImpactfulVerb[];
   formattingSuggestions: FormattingSuggestion[];
   optimizedResumeMarkdown?: string;
+  _meta?: {
+    latencyMs?: number;
+    executionMode?: 'live' | 'demo';
+    cached?: boolean;
+    model?: string;
+    timestamp?: string;
+  };
 }
 
 export interface InterviewMessage {

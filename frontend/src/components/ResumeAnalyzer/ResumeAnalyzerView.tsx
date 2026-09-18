@@ -6,6 +6,7 @@ import { extractTextFromFile } from '../../utils/fileParser.ts';
 import { JobDescriptionMatcher } from './JobDescriptionMatcher.tsx';
 import { SideBySideDiffView } from './SideBySideDiffView.tsx';
 import { saveHistoryItem } from '../../utils/historyStorage.ts';
+import { TelemetryBadge } from '../Common/TelemetryBadge.tsx';
 
 interface ResumeAnalyzerViewProps {
   onStartMockInterviewForRole?: (role: string) => void;
@@ -563,6 +564,11 @@ Senior Solutions Architect with 7+ years architecting enterprise distributed clo
                     {analysis.matchLevel}
                   </span>
                 </div>
+                {analysis._meta && (
+                  <div className="mb-2">
+                    <TelemetryBadge meta={analysis._meta} />
+                  </div>
+                )}
                 <p className="text-sm text-[#464555] max-w-md leading-relaxed">
                   {analysis.summary}
                 </p>

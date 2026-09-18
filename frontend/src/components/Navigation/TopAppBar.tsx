@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface TopAppBarProps {
   onOpenMobileMenu: () => void;
@@ -18,6 +18,19 @@ export const TopAppBar: React.FC<TopAppBarProps> = ({
   const [search, setSearch] = useState('');
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const [backendStatus, setBackendStatus] = useState<{ online: boolean; demo: boolean }>({ online: true, demo: false });
+
+  useEffect(() => {
+    fetch('/api/status')
+      .then((res) => res.json())
+      .then((data) => {
+        setBackendStatus({
+          online: data.status === 'online',
+          demo: Boolean(data.demoModeActive),
+        });
+      })
+      .catch(() => setBackendStatus({ online: false, demo: true }));
+  }, []);
   const [notifications, setNotifications] = useState([
     {
       id: '1',
@@ -154,6 +167,30 @@ export const TopAppBar: React.FC<TopAppBarProps> = ({
               </div>
             </div>
           )}
+        </div>
+
+        {/* Live System Architecture / Connection Pill */}
+        <div
+          onClick={onOpenSettings}
+          className="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold border border-slate-200/80 bg-slate-50 hover:bg-slate-100 text-slate-700 cursor-pointer transition-colors"
+          title="System Architecture & Backend Connection Status"
+        >
+          <span
+            className={`h-2 w-2 rounded-full ${
+              backendStatus.online
+                ? backendStatus.demo
+                  ? 'bg-amber-500 animate-pulse'
+                  : 'bg-emerald-500'
+                : 'bg-rose-500'
+            }`}
+          />
+          <span>
+            {backendStatus.online
+              ? backendStatus.demo
+                ? 'Demo Sandbox'
+                : 'Live AI Active'
+              : 'Backend Offline'}
+          </span>
         </div>
 
         {/* Settings button */}
