@@ -11,7 +11,7 @@ interface VoiceVideoStageProps {
   isCameraOn: boolean;
   setIsCameraOn: (on: boolean) => void;
   userSpeechInput: string;
-  setUserSpeechInput: (text: string) => void;
+  setUserSpeechInput: React.Dispatch<React.SetStateAction<string>>;
   onSendResponse: (customText?: string) => void;
   onReplayQuestion: () => void;
   ttsEnabled: boolean;

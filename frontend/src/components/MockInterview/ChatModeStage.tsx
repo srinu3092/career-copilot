@@ -6,7 +6,7 @@ interface ChatModeStageProps {
   currentInterviewer: InterviewerPersona;
   isEvaluating: boolean;
   userSpeechInput: string;
-  setUserSpeechInput: (text: string) => void;
+  setUserSpeechInput: React.Dispatch<React.SetStateAction<string>>;
   onSendResponse: (customText?: string) => void;
   onSpeakText: (text: string) => void;
   isMicOn: boolean;
